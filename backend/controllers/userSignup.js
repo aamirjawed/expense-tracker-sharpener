@@ -1,5 +1,11 @@
 
+const path = require('path')
 const db = require('../utils/db-connection')
+
+
+const sentSignForm = (req,res) => {
+    res.sendFile(path.join(__dirname, '../views/index.html'))
+}
 
 
 const userSignup = (req, res) => {
@@ -20,4 +26,10 @@ const userSignup = (req, res) => {
     })
 }
 
-module.exports = {userSignup}
+const sentLoginPage = (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/login.html'))
+}
+
+
+
+module.exports = {userSignup, sentSignForm, sentLoginPage}

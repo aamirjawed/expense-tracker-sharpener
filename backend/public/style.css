@@ -4,14 +4,17 @@
 }
 
 
-.form-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column;
-    transform: scale(1.2);
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
 }
+
 
 .form-title{
     font-size: 5rem;
