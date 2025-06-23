@@ -33,6 +33,25 @@ connection.connect((err)=>{
         console.log("Table is created")
     })
 
+    // expense table
+    const expenseTableQuery = `create table if not exists expense(
+        id int primary key auto_increment,
+        amount int,
+        description varchar(255),
+        category varchar(255)
+
+    )`
+
+    connection.execute(expenseTableQuery, (err) => {
+        if(err){
+            console.log(err)
+            connection.end()
+            return
+        }
+
+        console.log("Expense table is created")
+    })
+
     
 })
 

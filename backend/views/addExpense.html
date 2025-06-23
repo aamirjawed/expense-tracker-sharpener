@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/expenseCSS/style.css">
+
+</head>
+<body>
+    <div class="expense-container">
+        <h1 class="expense-heading">Expenses</h1>
+
+        <div>
+            <form class="expense-form" id="form">
+                <div class="form-group">
+                    <label for="amount">Amount:</label>
+                    <input type="number" id="amount" name="amount" />
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <input type="text" id="description" name="description" />
+                </div>
+
+                <div class="form-group">
+                    <label for="amount">Select Category:</label>
+                    <select id="category">
+                        <option>Rent</option>
+                        <option>Food</option>
+                        <option>Groceries</option>
+                        <option>Electricity Bill</option>
+                        <option>Maid</option>
+                    </select>
+                    
+                </div>
+
+                <button type="submit">Add Expense</button>
+            </form>
+        </div>
+    </div>
+
+    <ul id="list-expense">
+
+    </ul>
+
+    <script src="/expenseCSS/expense.js"></script>
+</body>
+</html>
