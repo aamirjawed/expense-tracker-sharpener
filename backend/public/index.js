@@ -20,18 +20,35 @@ form.addEventListener('submit', async (e) => {
             headers:{
                 "Content-Type": "application/json"
             },
+
+            
             body:JSON.stringify({
                 name, 
                 email,
                 password
             })
+
+            
         })
+
+        if(!response.ok){
+            if(response.status===409){
+                alert("This email already exist")
+            }else{
+                alert("Sign up failed. Please try again")
+            }
+            return
+        }
+
+        alert("Sign Up successful")
+
+        form.reset()
 
     }catch(err){
         console.log(err)
     }
 
-    console.log(name, email, password)
+   
 
     
 })

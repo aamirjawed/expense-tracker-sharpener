@@ -1,7 +1,7 @@
 const form = document.getElementById('form')
 
 
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const email = document.getElementById('email').value.trim()
@@ -11,5 +11,26 @@ form.addEventListener('submit', (e) => {
         alert("All fields are required")
     }
 
-    console.log(email, password)
+    try{
+    const response = await fetch('http://localhost:3000/user/login', {
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({email, password})
+    })
+    const data = await response.json()
+
+    if(!response.ok){
+        alert(data.message || "Login failed. Try again!")
+        return
+    }
+
+    alert("Login Successful")
+    }catch(err){
+        alert( "Something went happen")
+    }
+    
+
+    
 })
