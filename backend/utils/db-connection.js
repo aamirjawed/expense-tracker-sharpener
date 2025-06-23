@@ -3,7 +3,7 @@ const mysql = require('mysql2')
 const connection = mysql.createConnection ({
     host:"localhost",
     user:'root',
-    password:"",
+    password:"8083571820",
     database:'testdb'
 })
 
@@ -18,9 +18,9 @@ connection.connect((err)=>{
     // sign up query
     const creationQuery = `create table if not exists user(
         id int primary key auto_increment,
-        name varchar(20),
-        email varchar(20),
-        password varchar(20)
+        name varchar(100),
+        email varchar(100),
+        password varchar(255)
     )`
 
     connection.execute(creationQuery, (err) => {
