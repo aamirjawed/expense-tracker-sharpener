@@ -10,7 +10,7 @@ form.addEventListener('submit', async (e) => {
   const amount = document.getElementById('amount').value.trim();
   const description = document.getElementById('description').value.trim();
   const category = document.getElementById('category').value;
-
+  
   if (!amount || !description || !category) {
     alert("All fields are required");
     return;
@@ -52,7 +52,7 @@ async function fetchExpense() {
     expenseList.innerHTML = "";
     data.expenses.forEach(expense => {
       const li = document.createElement('li');
-      li.textContent = `${expense.description} - ₹${expense.amount} [${expense.category}]`;
+      li.textContent = `${expense.category} - ${expense.description} - ₹${expense.amount} `;
       expenseList.appendChild(li);
     });
   } catch (error) {

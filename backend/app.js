@@ -20,6 +20,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/user', userRoutes)
 app.use('/', expenseRoutes)
 
-app.listen(3000, () => [
+db.sync().then((result) => {
+    app.listen(3000, () => [
     console.log("Server is running on 3000")
 ])
+}).catch((err) => {
+    console.log(err)
+});
+
