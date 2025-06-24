@@ -1,7 +1,8 @@
 const path = require("path");
 const db = require("../utils/db-connection");
-const bcrypt = require('bcryptjs')
-const {User} = require("../models/userModel")
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const { User } = require('../models'); 
 
 const sentSignForm = (req, res) => {
   res.sendFile(path.join(__dirname, "../views/index.html"));
@@ -9,6 +10,11 @@ const sentSignForm = (req, res) => {
 
 const userSignup = async (req, res) => {
   const { name, email, password } = req.body;
+  const existingEmail =await User.findOne({where:{email}});
+
+  if(existingEmail){
+    return res.status(409).json({message:"This email already exists"})
+  }
 
   const hashedPassword = await bcrypt.hash(password, 10)
 
@@ -32,29 +38,39 @@ const sentLoginPage = (req, res) => {
   res.sendFile(path.join(__dirname, "../views/login.html"));
 };
 
+
+
 const userLogin = async (req, res) => {
   const { email, password } = req.body;
- 
-  
+
   try {
-    const user = await User.findOne({where:{email}})
+    const user = await User.findOne({ where: { email } });
 
-    if(!user){
-      return res.status(400).json({message:`User with ${email} not found`})
+    if (!user) {
+      return res.status(400).json({ message: "Invalid email or password" });
     }
 
-    const isMatch = bcrypt.compare(password, user.password)
+    const isMatch = await bcrypt.compare(password, user.password); 
 
-    if(!isMatch){
-      return res.status(401).json({message:'Invalid email or password'})
+    if (!isMatch) {
+      return res.status(401).json({ message: 'Invalid email or password' });
     }
 
-    res.status(200).json({message:"Login successful", user})
+    
+    const token = jwt.sign({ id: user.id }, '34398fdjhf9e8r398', { expiresIn: '1h' });
+
+    
+    return res.status(200).json({
+      message: "Login successful",
+      token  
+    });
+
   } catch (error) {
     console.error("Login error:", error);
-    res.status(500).json({ message: "Server error during login" });
+    return res.status(500).json({ message: "Server error during login" });
   }
- 
 };
+
+module.exports = { userLogin };
 
 module.exports = { userSignup, sentSignForm, sentLoginPage, userLogin };

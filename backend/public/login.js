@@ -8,7 +8,7 @@ form.addEventListener('submit', async (e) => {
 
     if (!email || !password) {
         alert("All fields are required");
-        return; // ✅ Prevent further request if fields are empty
+        return;
     }
 
     try {
@@ -27,9 +27,14 @@ form.addEventListener('submit', async (e) => {
             return;
         }
 
-        // ✅ Redirect to expense page after successful login
-        window.location.href = "/addExpense.html"; // Update path if needed
+        // ✅ Save token in localStorage
+        localStorage.setItem('token', data.token);
+
+        // ✅ Redirect after saving the token
+        window.location.href = "/addExpense.html"; // adjust path if needed
+
     } catch (err) {
-        alert("Something went wrong"); // ✅ Corrected error message
+        alert("Something went wrong");
+        console.error("Login error:", err);
     }
 });
