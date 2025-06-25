@@ -1,4 +1,5 @@
 const form = document.getElementById('form');
+const membershipBtn = document.getElementById('buy_membership')
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -27,14 +28,19 @@ form.addEventListener('submit', async (e) => {
             return;
         }
 
-        // ✅ Save token in localStorage
+        // Save token in localStorage
         localStorage.setItem('token', data.token);
 
-        // ✅ Redirect after saving the token
+        // Redirect after saving the token
         window.location.href = "/addExpense.html"; // adjust path if needed
 
     } catch (err) {
         alert("Something went wrong");
         console.error("Login error:", err);
     }
+});
+
+
+membershipBtn.addEventListener('click', () => {
+    window.location.href = '/payment.html';
 });

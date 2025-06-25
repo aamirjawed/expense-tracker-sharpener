@@ -4,7 +4,7 @@ const authenticateUser = require("../middleware/expenseMiddleware")
 
 const router = express.Router()
 
-router.get('/add-expense', sentAddExpense )
+router.get('/add-expense', authenticateUser, sentAddExpense )
 router.post('/add-expense',authenticateUser, addExpense)
 
 

@@ -1,11 +1,21 @@
 const form = document.getElementById('form');
 const expenseList = document.getElementById('list-expense');
 
+// ✅ Helper to handle unauthorized/forbidden responses
+function handleAuthError(response) {
+  if (response.status === 401 || response.status === 403) {
+    localStorage.removeItem('token');
+    window.location.href = '/login.html';
+    return true;
+  }
+  return false;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const token = localStorage.getItem('token');
 
+  // ✅ Redirect immediately if no token
   if (!token) {
-    alert('Please log in to continue.');
     window.location.href = '/login.html';
     return;
   }
@@ -37,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await response.json();
 
       if (!response.ok) {
+        if (handleAuthError(response)) return;
         alert(data.message || "Something went wrong. Try again!");
         return;
       }
@@ -63,6 +74,7 @@ async function fetchExpense(token) {
     const data = await response.json();
 
     if (!response.ok) {
+      if (handleAuthError(response)) return;
       alert(data.message || "Failed to load expenses");
       return;
     }

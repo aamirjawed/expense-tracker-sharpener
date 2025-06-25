@@ -2,6 +2,7 @@ const express = require('express')
 const db = require('./utils/db-connection')
 const userRoutes = require('./routes/userRoutes')
 const expenseRoutes = require('./routes/expenseRoutes')
+const paymentRoutes = require('./routes/paymentRoutes')
 const cors = require("cors")
 const path  = require("path")
 
@@ -19,6 +20,11 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/user', userRoutes)
 app.use('/', expenseRoutes)
+
+// payment routes
+
+app.use('/', paymentRoutes)
+
 
 db.sync().then((result) => {
     app.listen(3000, () => [
