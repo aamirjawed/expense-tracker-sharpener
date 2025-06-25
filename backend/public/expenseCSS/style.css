@@ -1,6 +1,7 @@
 *{
     margin: 0;
     padding: 0;
+    border: 1px solid black;
 }
 .expense-container{
     display: flex;
@@ -12,15 +13,22 @@
 }
 
 .expense-heading{
-    font-size: 5rem;
-   padding: 2rem;
+    font-size: 2rem;
+    margin: 2rem;
+   position: absolute;
+   top: 0;
+   left: 0;
 }
 
 .expense-form{
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     width: 300px;
     gap: 1.5rem;
+    border: 1px solid black;
+    padding: 2rem;
+    border-radius: 5px;
 }
 
 .form-group{
