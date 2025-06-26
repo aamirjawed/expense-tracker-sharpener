@@ -53,7 +53,7 @@ exports.getPaymentStatus = async (req, res) => {
     const order = await Payment.findOne({ paymentSessionId });
 
     // Update the order's status
-    order.status = orderStatus;
+    order.paymentStatus = orderStatus;
     await order.save();
     
     res.json({orderStatus})

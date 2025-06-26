@@ -83,11 +83,32 @@ async function fetchExpense(token) {
 
     data.allExpenses.forEach(expense => {
       const li = document.createElement('li');
-      li.textContent = `${expense.category} - ${expense.description} - ₹${expense.amount}`;
+      li.innerHTML = `${expense.category} - ${expense.description} - ₹${expense.amount}
+      <button onclick="deleteExpense(${expense.id})">Delete</button>
+      `;
+    
       expenseList.appendChild(li);
     });
   } catch (error) {
     console.error("Error fetching expenses:", error);
     alert("Something went wrong while loading expenses.");
   }
+}
+
+async function deleteExpense(id){
+try {
+    const response = await fetch(`http://localhost:3000/user/user-details/${id}`, {
+      method:"DELETE",
+      headers:{
+        'Content-type':'application/json',
+        'Authorization':`Bearer ${token}`
+      }
+    })
+
+    const data = await response.json();
+
+    data.removeItem();
+} catch (error) {
+  
+}
 }
